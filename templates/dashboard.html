@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Trojan Authentication{% endblock %}
+
+{% block header %}User Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="user-info">
+        <h3>Welcome back!</h3>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>User ID:</strong> {{ user.id }}</p>
+    </div>
+    
+    <p>You are successfully logged in to the Trojan authentication system.</p>
+    
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+    
+    <div style="margin-top: 30px;">
+        <h3>Your Account Security:</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li>✅ Password is securely hashed</li>
+            <li>✅ Session is active and managed</li>
+            <li>✅ Data is protected</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
