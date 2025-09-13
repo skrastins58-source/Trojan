@@ -30,3 +30,8 @@ build/
 
 # Log files
 *.log
+
+# Sourcery
+.sourcery/
+sourcery_output/
+.sourcery_config

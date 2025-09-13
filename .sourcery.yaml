@@ -1,0 +1,73 @@
+# Sourcery configuration for Trojan repository
+# https://docs.sourcery.ai/
+
+# Rules to enable
+rules:
+  - default
+
+# Minimum quality score for suggestions
+# (1-5 scale, where 5 is highest quality)
+min_quality: 3
+
+# Enable refactoring suggestions
+refactor:
+  skip_default_rules: false
+  
+# Configure which files to analyze
+include:
+  - "**/*.py"
+  - "**/*.js" 
+  - "**/*.ts"
+  - "**/*.jsx"
+  - "**/*.tsx"
+  - "scripts/*.sh"
+
+# Files and directories to exclude
+exclude:
+  - ".git/**"
+  - "node_modules/**"
+  - "dist/**"
+  - "build/**"
+  - "*.min.js"
+  - "*.bundle.js"
+
+# GitHub integration settings
+github:
+  # Request review for refactorings that are harder to understand
+  request_review: author
+  # Enable Sourcery comments on pull requests
+  sourcery_branch: true
+
+# Python-specific settings (for future use)
+python:
+  # Python version to target
+  version: "3.8"
+
+# JavaScript-specific settings (for future use) 
+javascript:
+  # ECMAScript version to target
+  version: "ES2020"
+
+# Custom rules (can be expanded as needed)
+custom_rules:
+  - id: no-hardcoded-credentials
+    description: "Avoid hardcoded credentials in code"
+    pattern: "(password|secret|token|key)\\s*=\\s*['\"][^'\"]+['\"]"
+    severity: error
+    languages: ["python", "javascript", "bash"]
+
+# Metrics to track
+metrics:
+  # Enable complexity tracking
+  complexity: true
+  # Enable method length tracking  
+  method_length: true
+  # Enable duplicate code detection
+  duplicate_code: true
+
+# Review settings
+review:
+  # Enable automatic refactoring suggestions
+  auto_approve: false
+  # Require manual review for complex changes
+  require_approval: true
