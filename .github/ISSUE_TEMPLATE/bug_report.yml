@@ -1,0 +1,58 @@
+name: Kļūdas ziņojums
+description: Ziņo par kļūdu vai problēmu
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Paldies, ka ziņoji par kļūdu! Lūdzu, aizpildi šo formu detalizēti.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Kas notika?
+      description: Īss kļūdas apraksts
+      placeholder: Apraksti, kas notika
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Gaidītā uzvedība
+      description: Ko tu gaidīji, ka notiks?
+      placeholder: Apraksti gaidīto uzvedību
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproducēšanas soļi
+      description: Kā var atkārtot šo kļūdu?
+      placeholder: |
+        1. Dodies uz...
+        2. Klikšķini uz...
+        3. Skrolē līdz...
+        4. Redzi kļūdu
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Problēmas smagums
+      options:
+        - Zems - netraucē pamata funkcionalitāti
+        - Vidējs - daļēji traucē funkcionalitāti
+        - Augsts - bloķē svarīgu funkcionalitāti
+        - Kritisks - sistēma nedarbojas
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Papildu informācija
+      description: Jebkāda cita informācija par kļūdu

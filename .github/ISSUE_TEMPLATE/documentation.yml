@@ -1,0 +1,61 @@
+name: Dokumentācijas uzlabojums
+description: Ieteikums dokumentācijas uzlabošanai
+title: "[DOCS] "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Paldies par ieteikumu dokumentācijas uzlabošanai!
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Dokumentācijas tips
+      options:
+        - README
+        - API dokumentācija
+        - Lietotāja vadlīnijas
+        - Izstrādātāja vadlīnijas
+        - CI/CD dokumentācija
+        - Cits
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-issue
+    attributes:
+      label: Pašreizējā problēma
+      description: Kas nav skaidrs vai ko trūkst dokumentācijā?
+      placeholder: Apraksti, kas dokumentācijā nav skaidrs
+    validations:
+      required: true
+
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Ieteiktais uzlabojums
+      description: Kā var uzlabot dokumentāciju?
+      placeholder: Apraksti, kā uzlabot dokumentāciju
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Faila atrašanās vieta
+      description: Kurā failā ir problēma?
+      placeholder: "piemēram: docs/index.md vai README.md"
+
+  - type: checkboxes
+    id: willingness-docs
+    attributes:
+      label: Gatavība palīdzēt
+      options:
+        - label: Es būtu gatavs(-a) palīdzēt uzrakstīt vai uzlabot dokumentāciju
+
+  - type: textarea
+    id: additional-docs
+    attributes:
+      label: Papildu informācija
+      description: Jebkāda cita informācija par dokumentācijas uzlabojumu

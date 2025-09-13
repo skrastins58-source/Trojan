@@ -1,0 +1,59 @@
+name: Jauna funkcionalitāte
+description: Ieteikums jaunai funkcionalitātei vai uzlabojumam
+title: "[FEATURE] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Paldies par ieteikumu! Lūdzu, apraksti savu ideju detalizēti.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problēmas apraksts
+      description: Kādu problēmu šī funkcionalitāte risinātu?
+      placeholder: Apraksti problēmu, ko vēlies atrisināt
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Ieteiktais risinājums
+      description: Kā tu vēlētos, lai šī problēma tiktu atrisināta?
+      placeholder: Apraksti savu risinājuma ideju
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatīvi risinājumi
+      description: Kādus citus risinājumus tu esi apsvēris?
+      placeholder: Apraksti alternatīvus risinājumus
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioritāte
+      options:
+        - Zema - nav steidzami
+        - Vidēja - vēlams nākamajā versijā
+        - Augsta - svarīgi nākamajā versijā
+        - Kritiska - nepieciešams nekavējoties
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: willingness
+    attributes:
+      label: Gatavība palīdzēt
+      options:
+        - label: Es būtu gatavs(-a) palīdzēt implementēt šo funkcionalitāti
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Papildu konteksts
+      description: Jebkāda cita informācija par šo funkcionalitāti
