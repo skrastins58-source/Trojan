@@ -1,0 +1,33 @@
+# Sourcery konfigurācija Trojan repozitorijam
+
+min-confidence: medium  # Analizē tikai ieteikumus ar vidēju vai augstu pārliecību
+enabled-branches:
+  - main
+  - dev
+  - copilot/*
+pr-comments: true  # Pievieno komentārus pie Pull Requestiem
+
+exclude:
+  - tests/**  # Izslēdz testu failus no refaktorēšanas
+  - docs/**   # Izslēdz dokumentāciju
+
+rules:
+  - pattern: "**/*.py"
+    description: >
+      Izvairīties no deeply nested if statements.
+      Lietot namedtuples, kur iespējams.
+      Noņemt redundant else blokiem.
+    blocking: false
+
+  - pattern: "src/**/*.js"
+    description: >
+      Lietot const/let nevis var.
+      Izvairīties no globāliem mainīgajiem.
+      Pārbaudīt, vai funkcijas ir tīras (pure).
+    blocking: true
+
+  - pattern: "**/*.ts"
+    description: >
+      Lietot interfeisus TypeScript vietā, kur iespējams.
+      Izvairīties no any tipa.
+    blocking: false
