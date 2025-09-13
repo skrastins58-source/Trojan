@@ -40,14 +40,16 @@ for template_file in "$TEMPLATE_DIR"/*.yml; do
         description=$(grep "^description:" "$template_file" | cut -d':' -f2- | sed 's/^ *//' | sed 's/^"//' | sed 's/"$//')
         
         if [ -n "$name" ] && [ -n "$description" ]; then
-            echo "### $name" >> "$OUTPUT_FILE"
-            echo "" >> "$OUTPUT_FILE"
-            echo "**Apraksts:** $description" >> "$OUTPUT_FILE"
-            echo "" >> "$OUTPUT_FILE"
-            echo "**Fails:** \`$filename\`" >> "$OUTPUT_FILE"
-            echo "" >> "$OUTPUT_FILE"
-            echo "---" >> "$OUTPUT_FILE"
-            echo "" >> "$OUTPUT_FILE"
+            {
+                echo "### $name"
+                echo ""
+                echo "**Apraksts:** $description"
+                echo ""
+                echo "**Fails:** \`$filename\`"
+                echo ""
+                echo "---"
+                echo ""
+            } >> "$OUTPUT_FILE"
             
             echo "✅ Pievienots indeksam: $name"
         else

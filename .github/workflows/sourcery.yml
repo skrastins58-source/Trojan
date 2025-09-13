@@ -1,0 +1,97 @@
+name: Sourcery Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  sourcery:
+    runs-on: ubuntu-latest
+    name: Sourcery Code Quality Check
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        # Fetch full history for better analysis
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Sourcery
+      run: |
+        pip install sourcery-cli
+
+    - name: Run Sourcery code analysis
+      env:
+        SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
+      run: |
+        echo "🔍 Running Sourcery code quality analysis..."
+        
+        # Check if SOURCERY_TOKEN is set
+        if [ -z "$SOURCERY_TOKEN" ]; then
+          echo "⚠️  SOURCERY_TOKEN not set. Skipping Sourcery analysis."
+          echo "To enable Sourcery, add your Sourcery token to GitHub Secrets."
+          echo "Get your token from: https://sourcery.ai/dashboard"
+          exit 0
+        fi
+        
+        # Run Sourcery analysis on all supported files
+        if [ -n "$(find . -name '*.py' -o -name '*.js' -o -name '*.ts' -o -name '*.jsx' -o -name '*.tsx' | head -1)" ]; then
+          echo "📊 Analyzing source code files..."
+          sourcery review --no-summary .
+        else
+          echo "ℹ️  No supported source code files found for analysis."
+          echo "Sourcery supports: Python (.py), JavaScript (.js), TypeScript (.ts), JSX (.jsx), TSX (.tsx)"
+        fi
+        
+        echo "✅ Sourcery analysis completed"
+
+    - name: Check for shell script quality (ShellCheck)
+      run: |
+        echo "🐚 Analyzing shell scripts..."
+        
+        # Install ShellCheck for shell script analysis
+        sudo apt-get update
+        sudo apt-get install -y shellcheck
+        
+        # Find and analyze shell scripts
+        shell_scripts=$(find . -name "*.sh" -not -path "./.git/*" || true)
+        
+        if [ -n "$shell_scripts" ]; then
+          echo "Found shell scripts to analyze:"
+          echo "$shell_scripts"
+          
+          for script in $shell_scripts; do
+            echo "🔍 Analyzing: $script"
+            shellcheck "$script" || echo "⚠️  Issues found in $script"
+          done
+        else
+          echo "ℹ️  No shell scripts found"
+        fi
+        
+        echo "✅ Shell script analysis completed"
+
+    - name: Summary
+      run: |
+        echo ""
+        echo "📋 Sourcery Analysis Summary"
+        echo "=========================="
+        echo "✅ Code quality check completed"
+        echo "📁 Configuration: .sourcery.yaml"
+        echo "🔧 To configure Sourcery token: https://sourcery.ai/dashboard"
+        echo ""
+        echo "💡 Tips:"
+        echo "- Add SOURCERY_TOKEN to GitHub Secrets to enable full analysis"
+        echo "- Sourcery will provide refactoring suggestions on pull requests"
+        echo "- Check .sourcery.yaml for configuration options"

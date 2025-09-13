@@ -1,0 +1,44 @@
+# Sourcery GitHub App Configuration
+# This file configures Sourcery as a GitHub App for automated code reviews
+
+# Enable Sourcery GitHub App integration
+# To enable:
+# 1. Go to https://github.com/apps/sourcery-ai 
+# 2. Click "Install" on your repository
+# 3. Configure permissions and access
+
+# App settings that will be used when installed
+settings:
+  # Enable pull request reviews
+  pull_request_reviews: true
+  
+  # Enable inline comments on code changes
+  inline_comments: true
+  
+  # Auto-approve simple refactorings
+  auto_approve_simple: false
+  
+  # Request changes for complex refactorings
+  request_changes_complex: false
+
+# Notification preferences
+notifications:
+  # Notify on new suggestions
+  suggestions: true
+  
+  # Notify on code quality improvements
+  quality_improvements: true
+  
+  # Notify on performance optimizations
+  performance: true
+
+# Integration with existing tools
+integrations:
+  # Work alongside existing CI/CD
+  respect_existing_checks: true
+  
+  # Integrate with GitHub status checks
+  status_checks: true
+  
+  # Work with branch protection rules
+  branch_protection: true
