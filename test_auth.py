@@ -5,7 +5,6 @@ Tests the core authentication functionality.
 """
 
 import sqlite3
-import hashlib
 import sys
 import os
 
