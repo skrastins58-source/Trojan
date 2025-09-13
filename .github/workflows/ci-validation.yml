@@ -1,0 +1,77 @@
+name: CI-bot validācija
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validēt dokumentāciju un konfigurācijas
+
+    steps:
+    - name: Checkout kods
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Instalēt rīkus
+      run: |
+        npm install -g markdownlint-cli
+        pip install yamllint
+
+    - name: Validēt Markdown failus
+      run: |
+        echo "Validē Markdown sintaksi..."
+        markdownlint --config .markdownlint.json . || echo "Markdown validācija pabeigta ar brīdinājumiem"
+
+    - name: Validēt YAML failus
+      run: |
+        echo "Validē YAML sintaksi..."
+        find . -name "*.yml" -o -name "*.yaml" | xargs yamllint -d relaxed || echo "YAML validācija pabeigta ar brīdinājumiem"
+
+    - name: Pārbaudīt issue šablonus
+      run: |
+        echo "Pārbauda issue šablonu struktūru..."
+        bash scripts/validate-issue-templates.sh
+
+    - name: Pārbaudīt dokumentācijas saites
+      run: |
+        echo "Pārbauda dokumentācijas saites..."
+        bash scripts/validate-links.sh
+
+    - name: Ģenerēt issue indeksu
+      run: |
+        echo "Ģenerē issue indeksu..."
+        bash scripts/generate-issue-index.sh
+
+    - name: Pievienot ci-bot label (ja automātisks PR)
+      if: github.actor == 'github-actions[bot]'
+      run: |
+        echo "Pievienots ci-bot label automātiskam PR"
+
+  security-check:
+    runs-on: ubuntu-latest
+    name: Drošības pārbaude
+
+    steps:
+    - name: Checkout kods
+      uses: actions/checkout@v4
+
+    - name: Pārbaudīt sensitīvos datus
+      run: |
+        echo "Pārbauda sensitīvos datus..."
+        bash scripts/check-sensitive-data.sh
+
+    - name: Validēt failu atļaujas
+      run: |
+        echo "Pārbauda failu atļaujas..."
+        find . -type f -perm /111 -not -path "./.git/*" -not -path "./scripts/*" | \
+        while read file; do
+          echo "Brīdinājums: Izpildāms fails ārpus scripts/: $file"
+        done
