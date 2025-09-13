@@ -1,0 +1,24 @@
+name: Validate Project
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure scripts are executable
+        run: chmod +x scripts/*.sh
+
+      - name: Run check-sensitive-data.sh
+        run: ./scripts/check-sensitive-data.sh
+
+      - name: Run generate-issue-index.sh
+        run: ./scripts/generate-issue-index.sh
+
+      - name: Run validate-issue-templates.sh
+        run: ./scripts/validate-issue-templates.sh
+
+      - name: Run validate-links.sh
+        run: ./scripts/validate-links.sh
