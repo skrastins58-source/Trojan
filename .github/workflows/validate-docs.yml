@@ -1,0 +1,50 @@
+name: Validate Documentation and Issue Templates
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Documentation and Issue Templates
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Make scripts executable
+      run: chmod +x scripts/*.sh
+
+    - name: Validate issue templates
+      run: |
+        echo "::group::Validating Issue Templates"
+        scripts/validate-issue-templates.sh
+        echo "::endgroup::"
+
+    - name: Check for sensitive data
+      run: |
+        echo "::group::Checking for Sensitive Data"
+        scripts/check-sensitive-data.sh
+        echo "::endgroup::"
+
+  label-bot-pr:
+    runs-on: ubuntu-latest
+    name: Label Bot PRs
+    if: github.event_name == 'pull_request' && (github.actor == 'github-actions[bot]' || github.actor == 'dependabot[bot]' || contains(github.actor, '[bot]'))
+    
+    steps:
+    - name: Add ci-bot label
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { owner, repo, number } = context.issue;
+          await github.rest.issues.addLabels({
+            owner,
+            repo,
+            issue_number: number,
+            labels: ['ci-bot']
+          });
+          console.log('Added ci-bot label to PR created by bot:', context.actor);

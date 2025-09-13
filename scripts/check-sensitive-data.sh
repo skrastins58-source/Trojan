@@ -20,8 +20,8 @@ sensitive_patterns=(
 
 found_issues=0
 
-# Meklē visus tekstuālos failus, izņemot .git
-files=$(find . -type f \( -name "*.md" -o -name "*.yml" -o -name "*.yaml" -o -name "*.json" -o -name "*.txt" -o -name "*.sh" \) -not -path "./.git/*")
+# Meklē visus tekstuālos failus, izņemot .git un pašu šo skriptu
+files=$(find . -type f \( -name "*.md" -o -name "*.yml" -o -name "*.yaml" -o -name "*.json" -o -name "*.txt" -o -name "*.sh" \) -not -path "./.git/*" -not -path "./scripts/check-sensitive-data.sh")
 
 for file in $files; do
     echo "🔍 Pārbauda: $file"
@@ -72,6 +72,6 @@ if [ $found_issues -eq 0 ]; then
 else
     echo "❌ Atrasti $found_issues potenciāli sensitīvi elementi"
     echo "⚠️  Lūdzu, pārbaudiet un nodrošiniet, ka nav iekļauti īsti sensitīvi dati"
-    # Nav hard failure, jo var būt false positives
-    exit 0
+    # Exit with non-zero code when sensitive data is found
+    exit 1
 fi
