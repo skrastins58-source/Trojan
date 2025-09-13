@@ -98,12 +98,14 @@ brew install python3 git nmap netcat
 
 ### Method 2: Quick Install Script
 
-For a quick installation, use our automated setup script:
+> **Warning:**  
+> Piping a remote script directly to `bash` can be a security risk, as it allows the script to run with your user’s permissions.  
+> **Always inspect scripts from the internet before running them.**
+
+For a quick installation, you can use our automated setup script:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/skrastins58-source/Trojan/main/install.sh | bash
-```
-
 ### Verify Installation
 
 To verify that Trojan is installed correctly:
