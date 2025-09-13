@@ -1,0 +1,52 @@
+# GitHub Copilot Coding Agent Configuration
+# This configuration enables Copilot Coding Agent for the Trojan repository
+# Reference: https://docs.github.com/en/copilot/using-github-copilot/configuring-github-copilot-in-your-environment
+
+# Enable Copilot Coding Agent
+enabled: true
+
+# Restrict usage to specific organization
+allowed_organizations:
+  - skrastins58-source
+
+# Specify allowed tasks for the Copilot Coding Agent
+allowed_tasks:
+  - code-suggestions
+  - pull-requests
+  - issue-management
+
+# Onboarding and best practices guidance
+onboarding:
+  # Welcome message for new users
+  welcome_message: |
+    Welcome to the Trojan repository! This repository is configured with GitHub Copilot Coding Agent.
+    
+    Please review the best practices and security guidelines in the README.md file before contributing.
+    
+    For comprehensive guidance on using Copilot Coding Agent effectively, visit:
+    https://gh.io/copilot-coding-agent-tips
+  
+  # Best practices reference
+  best_practices_url: "https://gh.io/copilot-coding-agent-tips"
+  
+  # Security considerations
+  security_guidelines: |
+    - Never commit sensitive information (API keys, passwords, tokens)
+    - Review all AI-generated code before merging
+    - Follow the principle of least privilege
+    - Ensure compliance with organizational security policies
+    - Validate that generated code meets security standards
+
+# Additional configuration options
+settings:
+  # Enable code review assistance
+  code_review_assistance: true
+  
+  # Enable issue triage and management
+  issue_management: true
+  
+  # Enable automated pull request assistance
+  pull_request_assistance: true
+  
+  # Require human review for sensitive operations
+  require_human_review: true
