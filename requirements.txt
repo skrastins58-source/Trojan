@@ -1,0 +1,35 @@
+# Trojan Application Dependencies
+# ================================
+# 
+# This application is designed to use only Python standard library modules.
+# No external dependencies are required for core functionality.
+#
+# Virtual Environment Setup (Recommended):
+# ----------------------------------------
+# It is strongly recommended to use a virtual environment to isolate 
+# this application from other Python projects on your system.
+#
+# To create and activate a virtual environment:
+#   python -m venv trojan_env
+#   source trojan_env/bin/activate  # On Windows: trojan_env\Scripts\activate
+#   pip install -r requirements.txt
+#
+# Python Version Requirements:
+# ---------------------------
+# Minimum Python version: 3.6
+# Recommended Python version: 3.8 or higher
+#
+# The application will check Python version at startup and provide 
+# helpful error messages if requirements are not met.
+#
+# Optional Development Dependencies:
+# ---------------------------------
+# If you plan to extend or develop this application, you may want to add:
+# - pytest>=6.0.0      # For advanced testing
+# - black>=21.0.0       # For code formatting  
+# - flake8>=3.8.0       # For code linting
+# - mypy>=0.800         # For type checking
+#
+# Add these dependencies above this comment if needed for development.
+
+# No runtime dependencies required - all functionality uses Python standard library
