@@ -262,9 +262,7 @@ Projekta Trojan starter-pack ar CI-bota vadlīnijām un dokumentāciju.
 1. Izlasi [CI-bota norādes](AGENT_GUIDELINES.md)
 2. Iepazīsties ar pieejamajiem [issue šabloniem](.github/ISSUE_TEMPLATE/)
 3. Pārbaudi [dokumentāciju](docs/index.md)
-
-## 🤖 CI-bot funkcionalitāte
-
+m
 Šis repozitorijs izmanto automatizētos CI-bota procesus:
 
 - ✅ Markdown, YAML un CI konfigurāciju validācija
