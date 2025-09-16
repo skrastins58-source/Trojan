@@ -269,9 +269,7 @@ m
 - 📄 Automātiska dokumentācijas indeksu ģenerēšana
 - 🔒 Sensitīvu datu pārbaude
 - 🏷️ Automātiska PR labelēšana
+   Sīkāka informācija atrodama [WORKFLOW.md](WORKFLOW.md).
 
-Sīkāka informācija atrodama [WORKFLOW.md](WORKFLOW.md).
-
-# Trojan Project
-(https://github.com/skrastins58-source/Trojan/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/skrastins58-source/Trojan/actions/workflows/validate.yml)
-
+ (https://github.com/skrastins58-source/Trojan/actions/workflows/validate.yml/badge.svg?branch=main)]
+ (https://github.com/skrastins58-source/Trojan/actions/workflows/validate.yml)
